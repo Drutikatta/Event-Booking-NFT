@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventick - Event Ticket Booking</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D75656",
+            secondary: "#BD114A",
+            lightbg: "#FDF7F8"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #D75656 0%, #BD114A 50%, #6d1b7b 100%);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .float-anim {
+      animation: floaty 3.5s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand-hover:hover {
+      transform: scale(1.05);
+      transition: 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+
+  <header class="hero-bg text-white min-h-screen overflow-hidden relative">
+    <nav class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <h1 class="text-2xl md:text-3xl font-bold">Eventick</h1>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#schedule" class="hover:text-pink-100">Schedule</a>
+        <a href="#events" class="hover:text-pink-100">Speakers</a>
+        <a href="tickets.html" class="hover:text-pink-100">Ticket</a>
+        <a href="#blog" class="hover:text-pink-100">Content</a>
+        <a href="admin.html" class="hover:text-pink-100">Admin</a>
+        <a href="bills.html" class="bg-white text-secondary px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition">
+  My Bills
+</a>
+        <a href="tickets.html" class="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-secondary transition">
+          Login
+        </a>
+      </div>
+    </nav>
+
+    <section class="max-w-7xl mx-auto px-6 pt-10 md:pt-16 pb-24 grid md:grid-cols-2 gap-10 items-center">
+      <div class="fade-up">
+        <img
+          src="images/hero-main.png"
+          alt="Main Event Banner"
+          class="w-full max-w-xl mx-auto rounded-3xl shadow-2xl float-anim object-cover"
+        />
+      </div>
+
+      <div class="fade-up">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-5">
+          Experience Events Like Never Before <br />
+          Book Event Tickets Securely on Blockchain
+        </h2>
+
+        <p class="text-white/90 text-lg max-w-xl mb-8">
+          Discover concerts, tech events, and live shows — powered by blockchain for secure, transparent, and tamper-proof ticketing.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="tickets.html" class="bg-primary hover:bg-secondary px-6 py-3 rounded-full font-semibold shadow-lg transition">
+            Get Ticket
+          </a>
+          <a href="#events" class="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-secondary transition">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-6 relative -mt-8 z-10">
+      <div class="glass-card rounded-2xl shadow-2xl p-5 grid md:grid-cols-4 gap-4">
+        <div>
+          <label class="text-sm text-white/80">Search Event</label>
+          <input id="landingSearch" type="text" placeholder="Search music, kpop, concert..." class="mt-2 w-full rounded-lg px-4 py-3 text-slate-900 outline-none" />
+        </div>
+
+        <div>
+          <label class="text-sm text-white/80">Place</label>
+          <input id="landingPlace" type="text" placeholder="Indonesia" class="mt-2 w-full rounded-lg px-4 py-3 text-slate-900 outline-none" />
+        </div>
+
+        <div>
+          <label class="text-sm text-white/80">Time</label>
+          <input id="landingDate" type="date" class="mt-2 w-full rounded-lg px-4 py-3 text-slate-900 outline-none" />
+        </div>
+
+        <div class="flex items-end">
+          <button id="landingSearchBtn" class="w-full bg-white text-secondary font-bold px-4 py-3 rounded-xl hover:bg-rose-50 transition">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="events" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
+      <div>
+        <h3 class="text-4xl font-bold text-slate-900">Upcoming Events</h3>
+        <p class="text-slate-600 mt-2">Explore trending events and sample categories</p>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-rose-50" data-category="all">All</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-rose-50" data-category="music">Music</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-rose-50" data-category="kpop">Kpop</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-rose-50" data-category="tech">Tech</button>
+      </div>
+    </div>
+
+    <div id="landingEventGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+    <div class="text-center mt-10">
+      <a href="tickets.html" class="inline-block border border-secondary text-secondary hover:bg-secondary hover:text-white px-8 py-3 rounded-full font-semibold transition">
+        Load More
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-[#F9E8EE] py-10 mt-6">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <img src="images/event6.jpg" alt="Create event" class="rounded-3xl shadow-lg w-full max-w-md" />
+      </div>
+
+      <div>
+        <h3 class="text-3xl font-bold mb-3">Make your own Event</h3>
+        <p class="text-slate-600 mb-6">Create your event listing, manage tickets, and reach your audience with a modern event platform.</p>
+        <a href="tickets.html" class="inline-block bg-primary hover:bg-secondary text-white px-8 py-3 rounded-full font-semibold transition">
+          Create Events
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <div class="text-center mb-10">
+      <h3 class="text-4xl font-bold mb-3">Join these brands</h3>
+      <p class="text-slate-500">Trusted by industry-leading brands and event communities</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center text-center text-xl font-semibold text-slate-500">
+      <div class="brand-hover">Spotify</div>
+      <div class="brand-hover">Google</div>
+      <div class="brand-hover">Stripe</div>
+      <div class="brand-hover">YouTube</div>
+      <div class="brand-hover">Microsoft</div>
+      <div class="brand-hover">Medium</div>
+      <div class="brand-hover">Zoom</div>
+      <div class="brand-hover">Uber</div>
+      <div class="brand-hover">Grab</div>
+      <div class="brand-hover">Airbnb</div>
+    </div>
+  </section>
+
+  <section id="blog" class="max-w-7xl mx-auto px-6 pb-20">
+    <div class="text-center mb-10">
+      <h3 class="text-4xl font-bold mb-3">Blog</h3>
+      <p class="text-slate-500">Event ideas, ticketing trends, and live experience stories</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+        <img src="images/blog1.png" alt="Blog 1" class="w-full h-52 object-cover" />
+        <div class="p-5">
+          <h4 class="font-bold text-lg mb-2">6 Strategies to Find Your Conference Keynote Speaker</h4>
+          <p class="text-slate-600 text-sm">Learn how to choose speakers that make your event memorable and engaging.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+        <img src="images/blog2.png" alt="Blog 2" class="w-full h-52 object-cover" />
+        <div class="p-5">
+          <h4 class="font-bold text-lg mb-2">How Successful Used Paid Marketing to Drive Incremental Ticket Sales</h4>
+          <p class="text-slate-600 text-sm">Smart promotion ideas for concerts, workshops, and public events.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+        <img src="images/blog3.png" alt="Blog 3" class="w-full h-52 object-cover" />
+        <div class="p-5">
+          <h4 class="font-bold text-lg mb-2">Introducing Workspaces: Work Smarter, Not Harder</h4>
+          <p class="text-slate-600 text-sm">Organize event planning and make team collaboration smoother.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <button class="border border-secondary text-secondary hover:bg-secondary hover:text-white px-8 py-3 rounded-full font-semibold transition">
+        Load More
+      </button>
+    </div>
+  </section>
+
+  <footer class="bg-[#1B1363] text-white pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">Eventick</h3>
+        <p class="text-white/70 text-sm">
+          Event booking platform with blockchain-backed purchases and secure ticket ownership.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Plan Events</h4>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>Create and Set Up</li>
+          <li>Sell Tickets</li>
+          <li>Online RSVP</li>
+          <li>Online Events</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Eventick</h4>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>About Us</li>
+          <li>Press</li>
+          <li>Contact Us</li>
+          <li>Help Center</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Stay In The Loop</h4>
+        <div class="bg-white rounded-full p-1 flex items-center overflow-hidden">
+          <input type="email" placeholder="Enter your email address.." class="flex-1 px-4 py-2 text-slate-700 outline-none rounded-full" />
+          <button class="bg-primary hover:bg-secondary text-white px-5 py-2 rounded-full text-sm font-semibold transition">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 mt-10 border-t border-white/20 pt-6 text-center text-white/60 text-sm">
+      Copyright © 2026 Eventick
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+</body>
+</html>

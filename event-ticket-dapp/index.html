@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Event Ticket Booking
+</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+<style>
+
+body {
+
+    font-family: Arial;
+    padding: 20px;
+
+}
+
+#eventContainer {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+}
+
+.event-card {
+
+    border: 1px solid black;
+
+    padding: 15px;
+
+    width: 250px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 10px gray;
+
+}
+
+button {
+
+    background: blue;
+
+    color: white;
+
+    padding: 10px;
+
+    border: none;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    background: darkblue;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+Event Ticket Booking
+</h1>
+
+<button onclick="connectWallet()">
+Connect Wallet
+</button>
+
+<h2>
+Available Events
+</h2>
+
+<div id="eventContainer">
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

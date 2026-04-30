@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D75656",
+            secondary: "#BD114A"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-rose-50 min-h-screen">
+
+  <header class="text-white" style="background: linear-gradient(to right, #D75656, #BD114A);">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <a href="landing.html" class="text-2xl font-bold">Eventick Admin</a>
+        <p class="text-white/80 text-sm mt-1">NFT Event Management Dashboard</p>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="connectBtn"
+          onclick="loadAdminDashboard()"
+          class="bg-white text-[#BD114A] px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition"
+        >
+          Connect Wallet
+        </button>
+
+        <a
+          href="landing.html"
+          class="border border-white px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#BD114A] transition"
+        >
+          Home
+        </a>
+        <a
+          href="tickets.html"
+          class="border border-white px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#BD114A] transition"
+        >
+          Tickets
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10">
+    <!-- Top -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-900">Admin Dashboard</h1>
+        <p class="text-slate-600 mt-2">Overview of events, tickets, revenue, and recent transactions.</p>
+      </div>
+
+      <div id="walletStatus" class="bg-white px-4 py-3 rounded-2xl shadow text-slate-700 font-medium">
+        Wallet not connected
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loadingText" class="bg-white rounded-2xl shadow p-8 text-center text-slate-600">
+      Click "Connect Wallet" to load dashboard
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" class="hidden space-y-8">
+
+      <!-- Stats Cards -->
+      <section>
+        <div id="statsGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      </section>
+
+      <!-- Simple Analytics -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-3xl shadow-lg p-6">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-xl font-bold text-slate-800">Tickets Sold Per Event</h2>
+            <span class="text-sm text-slate-500">Live Event Overview</span>
+          </div>
+          <div id="ticketsChart" class="space-y-4"></div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg p-6">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-xl font-bold text-slate-800">Revenue Per Event</h2>
+            <span class="text-sm text-slate-500">ETH Summary</span>
+          </div>
+          <div id="revenueChart" class="space-y-4"></div>
+        </div>
+      </section>
+
+      <!-- Event Table -->
+      <section class="bg-white rounded-3xl shadow-lg p-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-slate-800">Event-wise Summary</h2>
+          <span class="text-sm text-slate-500">All events</span>
+        </div>
+
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="text-left border-b border-slate-200 text-slate-600">
+              <th class="py-3 pr-4">Event</th>
+              <th class="py-3 pr-4">Location</th>
+              <th class="py-3 pr-4">Date</th>
+              <th class="py-3 pr-4">Total Tickets</th>
+              <th class="py-3 pr-4">Sold</th>
+              <th class="py-3 pr-4">Remaining</th>
+              <th class="py-3 pr-4">Price</th>
+              <th class="py-3 pr-4">Revenue</th>
+              <th class="py-3 pr-4">Status</th>
+            </tr>
+          </thead>
+          <tbody id="eventTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- Transactions -->
+      <section class="bg-white rounded-3xl shadow-lg p-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-slate-800">Recent Transactions</h2>
+          <span class="text-sm text-slate-500">From localStorage receipts</span>
+        </div>
+
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="text-left border-b border-slate-200 text-slate-600">
+              <th class="py-3 pr-4">Ticket ID</th>
+              <th class="py-3 pr-4">Event</th>
+              <th class="py-3 pr-4">Buyer</th>
+              <th class="py-3 pr-4">Amount</th>
+              <th class="py-3 pr-4">Purchase Time</th>
+              <th class="py-3 pr-4">Tx Hash</th>
+              <th class="py-3 pr-4">Status</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsTableBody"></tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/blockchain.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

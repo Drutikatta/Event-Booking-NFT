@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Bills</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D75656",
+            secondary: "#BD114A"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-rose-50 min-h-screen">
+
+  <header class="text-white" style="background: linear-gradient(to right, #D75656, #BD114A);">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="landing.html" class="text-2xl font-bold">Eventick</a>
+
+      <div class="flex gap-3">
+        <button
+          id="connectBtn"
+          onclick="loadMyBills()"
+          class="bg-white text-[#BD114A] px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition"
+        >
+          Connect Wallet
+        </button>
+
+        <a
+          href="tickets.html"
+          class="border border-white px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#BD114A] transition"
+        >
+          Tickets
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-900">My Bills</h1>
+        <p class="text-slate-600 mt-2">Your previous ticket purchases</p>
+      </div>
+
+      <div id="walletStatus" class="bg-white px-4 py-3 rounded-xl shadow text-slate-700">
+        Wallet not connected
+      </div>
+    </div>
+
+    <div id="loadingText" class="bg-white rounded-2xl shadow p-8 text-center text-slate-600">
+      Click "Connect Wallet" to load your bills
+    </div>
+
+    <div id="billsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"></div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/blockchain.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/bills.js"></script>
+</body>
+</html>

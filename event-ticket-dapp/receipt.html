@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Receipt</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D75656",
+            secondary: "#BD114A"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-rose-50 min-h-screen">
+
+  <header class="bg-gradient-to-r from-primary to-secondary text-white">
+    <div class="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
+      <a href="landing.html" class="text-2xl font-bold">Eventick</a>
+      <a href="tickets.html" class="bg-white text-secondary px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition">
+        Buy More Tickets
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div class="bg-gradient-to-r from-primary to-secondary text-white p-8">
+        <h1 class="text-4xl font-bold">Purchase Receipt</h1>
+        <p class="mt-2 text-white/90">Your blockchain verified ticket bill</p>
+      </div>
+
+      <div id="receiptContainer" class="p-8"></div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/receipt.js"></script>
+</body>
+</html>

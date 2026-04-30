@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Tickets</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D75656",
+            secondary: "#BD114A"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-rose-50 min-h-screen">
+
+  <header class="bg-gradient-to-r from-primary to-secondary text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+    <!-- Left: Logo -->
+    <a href="landing.html" class="text-2xl font-bold">Eventick</a>
+
+    <!-- Right: Nav Items -->
+    <div class="flex items-center gap-4">
+
+      <a href="bills.html"
+        class="bg-white text-secondary px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition">
+        My Bills
+      </a>
+
+      <a href="landing.html"
+        class="border border-white px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#BD114A] transition">
+        Home
+      </a>
+
+      <a href="admin.html"
+        class="border border-white px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#BD114A] transition">
+        Admin
+      </a>
+
+      <button id="connectBtn"
+        class="bg-white text-secondary px-5 py-2 rounded-full font-semibold hover:bg-rose-100 transition">
+        Connect Wallet
+      </button>
+
+    </div>
+  </div>
+</header>
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-900">Available Events</h1>
+        <p class="text-slate-600 mt-2">Buy tickets securely with blockchain</p>
+      </div>
+
+      <div id="walletStatus" class="text-sm text-slate-700 bg-white px-4 py-3 rounded-xl shadow">
+        Wallet not connected
+      </div>
+    </div>
+
+    <div id="loadingText" class="text-center text-slate-600 text-lg bg-white rounded-2xl p-8 shadow">
+      Click "Connect Wallet" to load events
+    </div>
+
+    <div id="eventsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"></div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/blockchain.js"></script>
+  <script src="js/tickets.js"></script>
+</body>
+
+</html>
